@@ -1,0 +1,53 @@
+﻿<Window x:Class="_2015_10_Croissants.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_2015_10_Croissants"
+        mc:Ignorable="d"
+        Title="Croissants par Florian Courgey"
+        Topmost="True"
+        Height="600" Width="800"
+        >
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Height="400">
+                <StackPanel Width="400">
+                    <GroupBox Margin="10,10,10,10">
+                        <GroupBox.Header>
+                            Configuration
+                        </GroupBox.Header>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Sujet"/>
+                            <TextBox x:Name="vSujet"/>
+                            <TextBlock Text="Destinataires separes par une virgule"/>
+                            <TextBox x:Name="vDestinataires" MinLines="3" TextWrapping="Wrap"/>
+                            <TextBlock Text="Contenu de l'email"/>
+                            <TextBox x:Name="vContenu" AcceptsReturn="True" MinLines="5"/>
+                            <Button x:Name="vSauvegarder" Content="Sauvegarder configuration" Click="vSauvegarder_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Margin="10,10,10,10">
+                        <GroupBox.Header>
+                            Outlook
+                        </GroupBox.Header>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Statut Outlook : "/>
+                            <TextBlock x:Name="vStatutOutlook"/>
+                            <Button Content="Ouvrir outlook" x:Name="vOuvrirOutlook" Click="vOuvrirOutlook_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <Button Content="ENVOYER" Click="vEnvoyer_Click" x:Name="vEnvoyer"/>
+            </DockPanel>
+            <GroupBox Margin="10,10,10,10">
+                <GroupBox.Header>
+                    Informations
+                </GroupBox.Header>
+                <!--<ScrollViewer Height="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">-->
+                <TextBox AcceptsReturn="True" x:Name="vDebug" TextWrapping="Wrap"/>
+                <!--</ScrollViewer>-->
+            </GroupBox>
+        </DockPanel>
+    </Grid>
+</Window>

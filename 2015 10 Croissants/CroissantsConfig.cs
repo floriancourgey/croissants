@@ -27,23 +27,20 @@ namespace _2015_10_Croissants {
         private const string LOG_NAME = "configuration";
         private string LOG_PATH = @"" + LOG_NAME+".xml";
 
-        private MainWindow mainWindow;
-
         public void save() {
-            mainWindow.debug("saving...");
+            Console.WriteLine("saving...");
             doc.Save(LOG_PATH);
-            mainWindow.debug("save OK");
+            Console.WriteLine("save OK");
         }
 
-        public CroissantsConfig(MainWindow mainWindow) {
-            this.mainWindow = mainWindow;
-            mainWindow.debug("ouverture config "+ LOG_PATH);
+        public CroissantsConfig() {
+            Console.WriteLine("ouverture config "+ LOG_PATH);
             doc = new XmlDocument();
             if (File.Exists(LOG_PATH)) {
-                mainWindow.debug("config deja existante");
+                Console.WriteLine("config deja existante");
                 doc.Load(LOG_PATH);
             } else {
-                mainWindow.debug("config non existante, creation");
+                Console.WriteLine("config non existante, creation");
                 XmlElement root = doc.CreateElement(LOG_NAME);
                 root.AppendChild(doc.CreateElement("sujet"));
                 root.AppendChild(doc.CreateElement("contenu"));
@@ -57,7 +54,7 @@ namespace _2015_10_Croissants {
 
                 
                 doc.Save(LOG_PATH);
-                mainWindow.debug("config creee");
+                Console.WriteLine("config creee");
             }
         }
 

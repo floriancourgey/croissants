@@ -6,13 +6,7 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace _2015_10_Croissants.outils {
     public class WindowsHelper {
-
-        private MainWindow mainWindow;
-
-        public WindowsHelper(MainWindow mainWindow) {
-            this.mainWindow = mainWindow;
-        }
-
+        
         public void ouvrirOutlook() {
             if (!isOutlookOpen())
                 openOutlook();
@@ -29,7 +23,7 @@ namespace _2015_10_Croissants.outils {
                         Console.WriteLine("outlook deja ouvert (" + process + ")");
                         return true;
                     }
-                } catch (Exception e) { mainWindow.debug("Impossible de scanner le process " + process + " (" + e + ")"); }
+                } catch (Exception e) { Console.WriteLine("Impossible de scanner le process " + process + " (" + e + ")"); }
             }
             Console.WriteLine("outlook non ouvert");
             return false;
@@ -37,12 +31,12 @@ namespace _2015_10_Croissants.outils {
         }
 
         public void openOutlook() {
-            mainWindow.debug("ouverture outlook");
+            Console.WriteLine("ouverture outlook");
             Microsoft.Win32.RegistryKey key =
             Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"Software\microsoft\windows\currentversion\app paths\OUTLOOK.EXE");
             string path = (string)key.GetValue("Path");
             if (path != null) {
-                mainWindow.debug("Outlook ouvert");
+                Console.WriteLine("Outlook ouvert");
                 Process.Start("OUTLOOK.EXE");
             } else {
                 throw new Exception("Outlook introuvable sur ce pc !");
@@ -51,32 +45,32 @@ namespace _2015_10_Croissants.outils {
 
         public void sendEmailThroughOutlook(string sujet, string contenu, string destinataires) {
             try {
-                mainWindow.debug("Creation application Outlook");
+                Console.WriteLine("Creation application Outlook");
                 Outlook.Application oApp = new Outlook.Application();
-                mainWindow.debug("Creation Mail");
+                Console.WriteLine("Creation Mail");
                 Outlook.MailItem oMsg = (Outlook.MailItem)oApp.CreateItem(Outlook.OlItemType.olMailItem);
-                mainWindow.debug("Creation contenu");
+                Console.WriteLine("Creation contenu");
                 oMsg.HTMLBody = contenu.Replace("\n", "<br/>");
-                mainWindow.debug("Creation sujet");
+                Console.WriteLine("Creation sujet");
                 oMsg.Subject = sujet;
-                mainWindow.debug("Creation destinataires");
+                Console.WriteLine("Creation destinataires");
                 Outlook.Recipients oRecips = oMsg.Recipients;
                 foreach (string destinataire in destinataires.Split(',')) {
-                    mainWindow.debug("Ajout " + destinataire);
+                    Console.WriteLine("Ajout " + destinataire);
                     Outlook.Recipient oRecip = oRecips.Add(destinataire);
-                    mainWindow.debug("Resolving " + destinataire);
+                    Console.WriteLine("Resolving " + destinataire);
                     oRecip.Resolve();
                     oRecip = null;
                 }
-                mainWindow.debug("Send.");
+                Console.WriteLine("Send.");
                 oMsg.Send();
-                mainWindow.debug("Clean up.");
+                Console.WriteLine("Clean up.");
                 oRecips = null;
                 oMsg = null;
                 oApp = null;
-                mainWindow.debug("Email envoye avec succes.");
+                Console.WriteLine("Email envoye avec succes.");
             } catch (Exception ex) {
-                mainWindow.debug("ERREUR " + ex);
+                Console.WriteLine("ERREUR " + ex);
             }
         }
     }

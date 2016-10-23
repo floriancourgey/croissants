@@ -4,14 +4,11 @@ namespace _2015_10_Croissants
 {
     class Croissants
     {
-        WindowsHelper windowsHelper;
-        CroissantsConfig config;
-
-        public Croissants()
+        public static void Main(string[] args)
         {
-            windowsHelper = new WindowsHelper();
+            WindowsHelper windowsHelper = new WindowsHelper();
             windowsHelper.ouvrirOutlook();
-            config = new CroissantsConfig();
+            CroissantsConfig config = new CroissantsConfig();
             windowsHelper.sendEmailThroughOutlook(config.sujet, config.contenu, config.destinataires);
         }
     }

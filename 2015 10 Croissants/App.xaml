@@ -1,8 +1,0 @@
-﻿<Application x:Class="_2015_10_Croissants.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:_2015_10_Croissants">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>
